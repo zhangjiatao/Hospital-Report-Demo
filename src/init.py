@@ -24,7 +24,6 @@ def init_index(es):
 			}
 		}
 	}
-
 	es.indices.delete(index='templets', ignore = 400) # 清空
 	es.indices.create(index='templets', ignore = [400, 404]) # 创建
 	result = es.indices.put_mapping(index='templets', doc_type='report', body=mapping) # 建立映射
