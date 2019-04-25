@@ -112,7 +112,7 @@ def initGUI():
 		lb.delete(0, END)
 		for res in res_list:
 			res = res['_source']
-			lb.insert('end', res['title'].replace('.txt', '') + res['content'])
+			lb.insert('end', '#'+ res['title'].replace('.txt', '') + '#:  ' + res['content'])
 	b1 = tk.Button(fr_lb, text='检索模板', width=10,height=2, command=searchTemplets)
 	b1.pack(side = 'left')
 
