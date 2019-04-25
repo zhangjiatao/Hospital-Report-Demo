@@ -1,3 +1,6 @@
+'''
+定义一些功能函数
+'''
 from elasticsearch import Elasticsearch
 import json
 import random
@@ -85,33 +88,3 @@ def fullfill(text, info_dict):
 	for info in info_dict.keys():
 		text = text.replace('<e>%s<e>' % info ,info_dict[info])
 	return text
-
-# def main():
-
-# 	es = Elasticsearch()
-
-# 	query_list = [
-# 		'左室短轴缩短率FS = 4.4，检查过程中胎心规律= 123次/分。,Emv长度为4.5'
-# 	]
-
-
-
-# 	item_list = createTable()  # 获取表格信息
-# 	print(extract(query_list[0], item_list))
-
-# 	# for query in query_list:
-# 	# 	res = search(es, query)
-# 	# 	title = res[0]['_source']['title'].replace('.txt', '')
-# 	# 	content = res[0]['_source']['content']
-# 	# 	info_dict = extract(item_list, query)
-# 	# 	print(info_dict)
-# 	# 	content = fullfill(content,info_dict)
-# 	# 	print(title)
-# 	# 	print(content)
-
-# 	# createTable()
-
-# 	# print(extract('该病人EF值为45，Vao是56.屁股宽为15, Emv长度为'))
-
-# if __name__ == '__main__':
-# 	main()

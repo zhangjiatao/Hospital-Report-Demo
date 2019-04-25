@@ -1,9 +1,11 @@
+'''
+用户界面及事件响应
+'''
 from tkinter import ttk
 import tkinter as tk  # 使用Tkinter前需要先导入
 from tkinter import *
-import demo
+import tools
 from elasticsearch import Elasticsearch
-
 
 REPORT_PATH = '/Users/zhangjiatao/Documents/MyProject/hospital/reports/report.txt'
 
@@ -22,7 +24,7 @@ def writeFile(file, item_list, text):
 
 def createTable():
 	global item_list
-	item_list = demo.createTable()
+	item_list = tools.createTable()
 	print('here', item_list)
 
 
@@ -33,7 +35,7 @@ def initGUI():
 	es = Elasticsearch()
 	# =============== 初始化窗口 ===============
 	window = tk.Tk()
-	window.title('report demo')
+	window.title('Report demo')
 	window.geometry('1000x700')  # 这里的乘是小x w * h
 
 	# =============== frame设置 ===============
@@ -91,7 +93,7 @@ def initGUI():
 	# =============== Listbox设置=============== 
 	lb = tk.Listbox(fr_rt, width = 40, height=10, relief = 'raised',   fg="blue", bd = 2)
 	lb.pack()
-	res_list = demo.search(es, '模板')
+	res_list = tools.search(es, '模板')
 	lb.delete(0, END)
 	for res in res_list:
 		res = res['_source']
@@ -108,7 +110,7 @@ def initGUI():
 		检索模板button相应事件
 		'''
 		query = t.get('0.0', 'end')
-		res_list = demo.search(es, query)
+		res_list = tools.search(es, query)
 		lb.delete(0, END)
 		for res in res_list:
 			res = res['_source']
@@ -121,11 +123,11 @@ def initGUI():
 		获取text框中的文本，方便进行检索
 		'''
 		text = t.get('0.0', 'end')
-		info_dict = demo.extract(text, item_list) # 抽取信息
+		info_dict = tools.extract(text, item_list) # 抽取信息
 		t.delete('0.0', 'end')
 		text = lb.get(lb.curselection())
 		text = re.sub(re.compile(r'#.*#:  ') , '', text)	
-		text = demo.fullfill(text, info_dict) # 自动填充文本
+		text = tools.fullfill(text, info_dict) # 自动填充文本
 
 		text = re.sub(re.compile(r'<e>.*<e>') , '__', text)
 		# text = text.replace('<e>.*<e>', '____')

@@ -1,8 +1,9 @@
+'''
+初始化elasticsearch数据
+'''
 from elasticsearch import Elasticsearch
 import os
-'''
-初始话elasticsearch数据
-'''
+
 DATA_PATH = '/Users/zhangjiatao/Documents/MyProject/hospital/data/'
 
 def init_index(es):
