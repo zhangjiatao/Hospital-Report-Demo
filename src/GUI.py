@@ -4,6 +4,9 @@ from tkinter import *
 import demo
 from elasticsearch import Elasticsearch
 
+
+REPORT_PATH = '/Users/zhangjiatao/Documents/MyProject/hospital/reports/report.txt'
+
 item_list = []
 
 def writeFile(file, item_list, text):
@@ -134,8 +137,7 @@ def initGUI():
 		'''
 		保存当前报告，并且刷新表格信息
 		'''
-		# print(t.get('0.0', 'end'))
-		writeFile('./report.txt',item_list, t.get('0.0', 'end'))
+		writeFile(REPORT_PATH, item_list, t.get('0.0', 'end'))
 		t.delete('0.0', 'end') # 刷新text框
 		writeTable() # 刷新表格
 
